@@ -1,0 +1,25 @@
+Version 1.0
+i)   Intial version Release
+
+Version 1.1
+i)   Solved Theme Check Issue.
+ii)  Instead of query_posts() use wp_query.
+iii) Add translation ready tags in style.css
+
+Version 1.2
+i)   Rectified theme demo link.
+
+Version 1.3
+i)   Rectified sidebar widgets look.
+
+Version 1.4
+i)   Configure Logo Option.
+ii)  All Default Widgets Formated Properly.
+iii) Solved Header Image And Home Boxes Issue.
+iii) Add Slider & Home Boxes Hide Functionality.
+
+Version 1.5
+i)   Resolved problems in layout due to HTML in featured boxes.
+ii)  Made copyright site name.
+iii) Resolved WooCommerce product layout issues.
+iv)  Removed featured boxes from all pages except frontpage. 

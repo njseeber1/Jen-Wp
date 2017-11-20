@@ -1,0 +1,379 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: SKT Girlie LIte\n"
+"POT-Creation-Date: 2016-04-27 11:30+0530\n"
+"PO-Revision-Date: 2015-09-07 14:39+0530\n"
+"Last-Translator: \n"
+"Language-Team: SKT Themes <support@sktthemes.com>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: _;__;_e;gettext;gettext_noop\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: 404.php:14
+msgid "<strong>404</strong> Not Found"
+msgstr ""
+
+#: 404.php:17
+msgid ""
+"Looks like you have taken a wrong turn.....<br />Don't worry... it happens "
+"to the best of us."
+msgstr ""
+
+#: archive.php:30
+#, php-format
+msgid "Author: %s"
+msgstr ""
+
+#: archive.php:38
+#, php-format
+msgid "Day: %s"
+msgstr ""
+
+#: archive.php:41
+#, php-format
+msgid "Month: %s"
+msgstr ""
+
+#: archive.php:44
+#, php-format
+msgid "Year: %s"
+msgstr ""
+
+#: archive.php:47
+msgid "Asides"
+msgstr ""
+
+#: archive.php:50
+msgid "Images"
+msgstr ""
+
+#: archive.php:53
+msgid "Videos"
+msgstr ""
+
+#: archive.php:56
+msgid "Quotes"
+msgstr ""
+
+#: archive.php:59
+msgid "Links"
+msgstr ""
+
+#: archive.php:62 sidebar.php:18
+msgid "Archives"
+msgstr ""
+
+#: comments.php:36 comments.php:56
+msgid "Comment navigation"
+msgstr ""
+
+#: comments.php:37 comments.php:57
+msgid "&larr; Older Comments"
+msgstr ""
+
+#: comments.php:38 comments.php:58
+msgid "Newer Comments &rarr;"
+msgstr ""
+
+#: comments.php:68
+msgid "Comments are closed."
+msgstr ""
+
+#: content-page.php:18 content-single.php:33 content.php:31 image.php:59
+msgid "Pages:"
+msgstr ""
+
+#: content-page.php:23 content-single.php:45 image.php:33 image.php:65
+msgid "Edit"
+msgstr ""
+
+#: content-single.php:38 content-single.php:39 content.php:16
+msgid ", "
+msgstr ""
+
+#: content.php:24
+msgid "Read More &raquo;"
+msgstr ""
+
+#: content.php:28
+msgid "Continue reading <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#: footer.php:15 inc/customizer.php:325
+msgid "About Girlie"
+msgstr ""
+
+#: footer.php:16
+msgid ""
+"Consectetur, adipisci velit, sed quiaony on numquam eius modi tempora "
+"incidunt, ut laboret dolore agnam aliquam quaeratine voluptatem. ut enim ad "
+"minima veniamting suscipit lab velit, sed quiaony on numquam eius."
+msgstr ""
+
+#: footer.php:37 inc/customizer.php:347
+msgid "Recent Posts"
+msgstr ""
+
+#: footer.php:53 inc/customizer.php:358
+msgid "Contact Info"
+msgstr ""
+
+#: functions.php:55
+msgid "Primary Menu"
+msgstr ""
+
+#: functions.php:68
+msgid "Blog Sidebar"
+msgstr ""
+
+#: functions.php:69
+msgid "Appears on blog page sidebar"
+msgstr ""
+
+#: header.php:38
+msgid "Menu"
+msgstr ""
+
+#: header.php:97 header.php:162 header.php:201 header.php:210
+msgid "Read More"
+msgstr ""
+
+#: header.php:208
+msgid "Page Title"
+msgstr ""
+
+#: header.php:209
+msgid ""
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque augue eros, "
+"posuere a condimentum sit amet, rhoncus eu libero. Maecenas in tincidunt "
+"turpis, ut rhoncus neque."
+msgstr ""
+
+#: image.php:23
+#, php-format
+msgid ""
+"Published <span class=\"entry-date\"><time class=\"entry-date\" datetime="
+"\"%1$s\">%2$s</time></span> at <a href=\"%3$s\">%4$s &times; %5$s</a> in <a "
+"href=\"%6$s\" rel=\"gallery\">%7$s</a>"
+msgstr ""
+
+#: image.php:38
+msgid "<span class=\"meta-nav\">&larr;</span> Previous"
+msgstr ""
+
+#: image.php:39
+msgid "Next <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#: inc/about-themes.php:11
+msgid "About Theme"
+msgstr ""
+
+#: inc/customizer.php:50
+msgid "Color Scheme"
+msgstr ""
+
+#: inc/customizer.php:51
+msgid "More color options in PRO Version."
+msgstr ""
+
+#: inc/customizer.php:59
+msgid "Homepage Four Boxes Section"
+msgstr ""
+
+#: inc/customizer.php:60
+msgid "Select Pages from the dropdown for homepage four boxes section"
+msgstr ""
+
+#: inc/customizer.php:115 inc/customizer.php:255
+msgid "Hide This Section"
+msgstr ""
+
+#: inc/customizer.php:120
+msgid "Slider Settings"
+msgstr ""
+
+#: inc/customizer.php:121
+#, php-format
+msgid ""
+"Featured Image Dimensions : ( 1400x682 )<br/> More slider settings available "
+"in PRO Version. <br /> How to set featured image %s"
+msgstr ""
+
+#: inc/customizer.php:121
+msgid "Click Here ?"
+msgstr ""
+
+#: inc/customizer.php:132
+msgid "Slide Image 1 "
+msgstr ""
+
+#: inc/customizer.php:139 inc/customizer.php:179 inc/customizer.php:219
+msgid "Living and Lifestyle Title"
+msgstr ""
+
+#: inc/customizer.php:143
+msgid "Slide title 1"
+msgstr ""
+
+#: inc/customizer.php:152
+msgid "Slider description  1"
+msgstr ""
+
+#: inc/customizer.php:162
+msgid "Slide link 1"
+msgstr ""
+
+#: inc/customizer.php:172
+msgid "Slide image 2"
+msgstr ""
+
+#: inc/customizer.php:183
+msgid "Slide title 2"
+msgstr ""
+
+#: inc/customizer.php:192
+msgid "Slide description 2"
+msgstr ""
+
+#: inc/customizer.php:202
+msgid "Slide link 2"
+msgstr ""
+
+#: inc/customizer.php:213
+msgid "Slide Image 3"
+msgstr ""
+
+#: inc/customizer.php:223
+msgid "Slide title 3"
+msgstr ""
+
+#: inc/customizer.php:232
+msgid "Slide Description 3"
+msgstr ""
+
+#: inc/customizer.php:243
+msgid "Slide link 3"
+msgstr ""
+
+#: inc/customizer.php:260
+msgid "Social Settings"
+msgstr ""
+
+#: inc/customizer.php:261
+msgid "More social icon available in PRO Version."
+msgstr ""
+
+#: inc/customizer.php:271
+msgid "Add facebook link here"
+msgstr ""
+
+#: inc/customizer.php:281
+msgid "Add twitter link here"
+msgstr ""
+
+#: inc/customizer.php:290
+msgid "Add google plus link here"
+msgstr ""
+
+#: inc/customizer.php:299
+msgid "Add linkedin link here"
+msgstr ""
+
+#: inc/customizer.php:306
+msgid "Footer Area"
+msgstr ""
+
+#: inc/customizer.php:330
+msgid "Add title for about girlie"
+msgstr ""
+
+#: inc/customizer.php:336
+msgid ""
+"Consectetur, adipisci velit, sed quiaony on numquam eius modi tempora "
+"incidunt, ut laboret dolore agnam aliquam quaeratine voluptatem. ut enim ad "
+"minima veniamting suscipit suscipit lab velit, sed quiaony on numquam eius."
+msgstr ""
+
+#: inc/customizer.php:341
+msgid "Add description for our philosophy"
+msgstr ""
+
+#: inc/customizer.php:352
+msgid "Add title for recent posts"
+msgstr ""
+
+#: inc/customizer.php:363
+msgid "Add Footer Contact Info"
+msgstr ""
+
+#: inc/customizer.php:370
+msgid "100 King St, Melbourne PIC 4000, Australia"
+msgstr ""
+
+#: inc/customizer.php:375
+msgid "Add contact address here"
+msgstr ""
+
+#: inc/customizer.php:382
+msgid "+123 456 7890"
+msgstr ""
+
+#: inc/customizer.php:386
+msgid "Add contact number here."
+msgstr ""
+
+#: inc/customizer.php:396
+msgid "Add you email here"
+msgstr ""
+
+#: index.php:51
+msgid "Latest Posts"
+msgstr ""
+
+#: index.php:70
+msgid "Read more &raquo;"
+msgstr ""
+
+#: no-results.php:14
+msgid "Nothing Found"
+msgstr ""
+
+#: no-results.php:20
+#, php-format
+msgid ""
+"Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr ""
+
+#: no-results.php:24
+msgid ""
+"Sorry, but nothing matched your search terms. Please try again with some "
+"different keywords."
+msgstr ""
+
+#: no-results.php:29
+msgid ""
+"It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
+"searching can help."
+msgstr ""
+
+#: search.php:16
+#, php-format
+msgid "Search Results for: %s"
+msgstr ""
+
+#: sidebar.php:11
+msgid "Category"
+msgstr ""
+
+#: sidebar.php:24
+msgid "Meta"
+msgstr ""
