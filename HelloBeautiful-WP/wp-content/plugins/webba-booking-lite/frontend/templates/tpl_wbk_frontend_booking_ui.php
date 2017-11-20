@@ -5,7 +5,6 @@
  	if( isset( $_GET['paypal_status'] ) ){
 ?>
 	<div class="wbk-outer-container">
-	
 			<div class="wbk-inner-container">
 				<div class="wbk-frontend-row">
 					<div class="wbk-col-12-12"> 
@@ -405,44 +404,46 @@
 				 	if ( $data[0] <> 0 ){
 				 		echo '<input type="hidden" id="wbk-service-id" value="' . $data[0] . '" />';
 				 		echo '<input type="hidden" id="wbk_current_category" value="0">'; 	 		
-				 	} else {
-				 					 		 
-					 	$label = get_option( 'wbk_service_label',  __( 'Select service', 'wbk' ) );
-				 	 	if( $label == '' ){
-				 	 		global $wbk_wording;
-				 	 		$label =  sanitize_text_field( $wbk_wording['service_label'] );
-				 	 	}
-						echo  '<label class="wbk-input-label">' . $label . '</label>';
-				 		echo '<select class="wbk-select wbk-input" id="wbk-service-id">'; 
-				 		echo '<option value="0" selected="selected">' . __( 'select...', 'wbk' ) . '</option>';
-						if( $data[1] == 0 ){
-					 		$arrIds = WBK_Db_Utils::getServices();					 	
-				 		} else {
-					 		$arrIds = WBK_Db_Utils::getServicesInCategory( $data[1] );
+				 	} else {			 
+					 	if( get_option( 'wbk_allow_service_in_url', 'no' ) == 'yes'  && isset( $_GET['service'] ) && is_numeric( $_GET['service'] ) ){
+					 		echo '<input type="hidden" id="wbk-service-id" value="' . $_GET['service'] . '" />';
+					 		echo '<input type="hidden" id="wbk_current_category" value="0">'; 	 		
+					 	} else {
+						 	$label = get_option( 'wbk_service_label',  __( 'Select service', 'wbk' ) );
+					 	 	if( $label == '' ){
+					 	 		global $wbk_wording;
+					 	 		$label =  sanitize_text_field( $wbk_wording['service_label'] );
+					 	 	}
+							echo  '<label class="wbk-input-label">' . $label . '</label>';
+					 		echo '<select class="wbk-select wbk-input" id="wbk-service-id">'; 
+					 		echo '<option value="0" selected="selected">' . __( 'select...', 'wbk' ) . '</option>';
+							if( $data[1] == 0 ){
+						 		$arrIds = WBK_Db_Utils::getServices();					 	
+					 		} else {
+						 		$arrIds = WBK_Db_Utils::getServicesInCategory( $data[1] );
+					 		}
+					 		foreach ( $arrIds as $id ) {
+					 			$service = new WBK_Service();
+					 			if ( !$service->setId( $id ) ) {  
+					 				continue;
+					 			}
+					 			if ( !$service->load() ) {  
+					 				continue;
+					 			}
+					 			$show_desc =  get_option( 'wbk_show_service_description', 'disabled' );
+					 			if( $show_desc == 'disabled' ){
+						 			echo '<option value="' . $service->getId() . '" >' . $service->getName( true ) . '</option>';
+					 			} else {
+						 			echo '<option data-desc="' . $service->getDescription( true ) . '" value="' . $service->getId() . '" >' . $service->getName( true ) . '</option>';
+					 			}
+					 			
+					 		}
+					 		echo '</select>';
+					 		echo '<input type="hidden" id="wbk_current_category" value="' . $data[1] . '">';				 		
+					 		if( $show_desc == 'enabled' ){
+					 			echo '<div id="wbk_description_holder"></div>';
+					 		}
 				 		}
-				 		foreach ( $arrIds as $id ) {
-				 			$service = new WBK_Service();
-				 			if ( !$service->setId( $id ) ) {  
-				 				continue;
-				 			}
-				 			if ( !$service->load() ) {  
-				 				continue;
-				 			}
-				 			$show_desc =  get_option( 'wbk_show_service_description', 'disabled' );
-				 			if( $show_desc == 'disabled' ){
-					 			echo '<option value="' . $service->getId() . '" >' . $service->getName( true ) . '</option>';
-				 			} else {
-					 			echo '<option data-desc="' . $service->getDescription( true ) . '" value="' . $service->getId() . '" >' . $service->getName( true ) . '</option>';
-				 			}
-				 			
-				 		}
-				 		echo '</select>';
-				 		echo '<input type="hidden" id="wbk_current_category" value="' . $data[1] . '">';				 		
-
-				 		if( $show_desc == 'enabled' ){
-				 			echo '<div id="wbk_description_holder"></div>';
-				 		}
-
 				 	}
 				 ?>
 			</div>

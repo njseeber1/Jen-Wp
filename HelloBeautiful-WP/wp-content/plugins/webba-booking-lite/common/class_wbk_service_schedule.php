@@ -586,6 +586,7 @@ class WBK_Service_Schedule {
 	public function renderDayFrontend( $time_after, $offset ){
 		global $wbk_wording;
 		$html = '';
+
 		$time_format = WBK_Date_Time_Utils::getTimeFormat();
 		$date_format = WBK_Date_Time_Utils::getDateFormat();
 		$time_slots = '';
@@ -626,7 +627,12 @@ class WBK_Service_Schedule {
 				$time = date_i18n( $time_format, $timeslot->getStart() ) . ' - ' . date_i18n( $time_format,  $end_minus_gap ) ;
 				if(  get_option( 'wbk_show_local_time', 'disabled' ) == 'enabled' ){
 					$timezone = new DateTimeZone( get_option( 'wbk_timezone' ) );
+
 					$current_offset =  $offset * -60 - $timezone->getOffset( new DateTime );
+					
+					 
+
+
 					$local_start = $timeslot->getStart() + $current_offset;
 					$local_start = date_i18n( $time_format, $local_start );
 					$local_end = $timeslot->getEnd() + $current_offset;

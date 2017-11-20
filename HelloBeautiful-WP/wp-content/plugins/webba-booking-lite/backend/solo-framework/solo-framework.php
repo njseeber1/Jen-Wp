@@ -276,8 +276,8 @@ class SoloFramework extends stdClass  {
 		 										   'css_prop' => 'border-radius'
 												    )); 		
 		 		$section->addCompontnet( $component );
-		 		// backround color
-				$component = new SLFColor( array( 'name' => __( 'Backround color', 'wbk' ),
+		 		// background color
+				$component = new SLFColor( array( 'name' => __( 'Background color', 'wbk' ),
 												   'desc' => __( 'Outer container background color', 'wbk' ),
 												   'slug' => 'outer_container_bg_color',
 												   'value' => '#ffffff',
@@ -317,9 +317,9 @@ class SoloFramework extends stdClass  {
 		 										   'css_prop' => 'border-radius'
 												    )); 		
 		 		$section->addCompontnet( $component );
-		 		// backround color
+		 		// background color
 				$component = new SLFColor( array( 'name' => __( 'Background color', 'wbk' ),
-												   'desc' => __( 'Inner container backround color', 'wbk' ),
+												   'desc' => __( 'Inner container background color', 'wbk' ),
 												   'slug' => 'inner_container_bg_color',
 												   'value' => '#f7f7f7',
 												   'css_class' => 'wbk-inner-container',
@@ -477,7 +477,7 @@ class SoloFramework extends stdClass  {
 		 												   )); 		
 		 		$section->addCompontnet( $component );
 				// background color
-				$component = new SLFColor( array( 'name' => __( 'Backround color', 'wbk' ),
+				$component = new SLFColor( array( 'name' => __( 'Background color', 'wbk' ),
 												   'desc' => __( 'Booking form input background color', 'wbk' ),
 												   'slug' => 'input_background',
 												   'value' => '#ffffff',
@@ -599,7 +599,7 @@ class SoloFramework extends stdClass  {
 												    )); 
 				$section->addCompontnet( $component );					
 				// checbox background color
-				$component = new SLFColor(  array('name' => __( 'Backround color', 'wbk' ),
+				$component = new SLFColor(  array('name' => __( 'Background color', 'wbk' ),
 												   'desc' => __( 'Booking form checkbox background', 'wbk' ),
 												   'slug' => 'checkbox_background',
 												   'value' => '#ffffff',
@@ -685,7 +685,7 @@ class SoloFramework extends stdClass  {
 												    )); 	
 				$section->addCompontnet( $component );			
 				// background color
-				$component = new SLFColor(  array('name' => __( 'Backround color', 'wbk' ),
+				$component = new SLFColor(  array('name' => __( 'Background color', 'wbk' ),
 												   'desc' => __( 'Button background color', 'wbk' ),
 												   'slug' => 'button_background',
 												   'value' => '#dbdbdb',
@@ -843,7 +843,7 @@ class SoloFramework extends stdClass  {
 												    )); 
 				$section->addCompontnet( $component );	
 				// background color
-				$component = new SLFColor(  array('name' => __( 'Backround color', 'wbk' ),
+				$component = new SLFColor(  array('name' => __( 'Background color', 'wbk' ),
 												   'desc' => __( 'Time slot background color', 'wbk' ),
 												   'slug' => 'timeslot_background',
 												   'value' => '#dbdbdb',
@@ -951,7 +951,7 @@ class SoloFramework extends stdClass  {
 		 												   ));   		
 				$section->addCompontnet( $component );	
 		 		// button background
-				$component = new SLFColor( array( 'name' => __( 'Button backround', 'wbk' ),
+				$component = new SLFColor( array( 'name' => __( 'Button background', 'wbk' ),
 														  'desc' => __( 'Time slot button background', 'wbk' ),
 														  'slug' => 'timeslot_button_background', 
 														  'value' => '#474747',
@@ -978,7 +978,7 @@ class SoloFramework extends stdClass  {
 		 												   ));  
 				$section->addCompontnet( $component );	
 		 		// active button background
-				$component = new SLFColor( array( 'name' => __( 'Active button backround', 'wbk' ),
+				$component = new SLFColor( array( 'name' => __( 'Active button background', 'wbk' ),
 														  'desc' => __( 'Time slot active button background', 'wbk' ),
 														  'slug' => 'timeslot_active_button_background', 
 														  'value' => '#474747',
@@ -1176,180 +1176,185 @@ class SoloFramework extends stdClass  {
 	}
 	public function renderPreview( $slug ){
  		$html =  '<div class="wbk-outer-container">
-	<div class="wbk-inner-container">
-		<div class="wbk-frontend-row">
-			<div class="wbk-col-12-12" id="wbk-service-id">
-				<label class="wbk-input-label">Select emloyee</label>
-				<select class="wbk-select wbk-input">
-					<option value="John Smith">John Smith</option>
-				</select>
-			</div>
-			<hr class="wbk-separator"/>
-		</div>
-		<div class="wbk-frontend-row" id="wbk-date-container">	
-			<div class="wbk-col-12-12" id="wbk-service-id">	
-		 		<label class="wbk-input-label">Select date</label>
-				<input type="text" class="wbk-input"/>
-			</div>		
-			<hr class="wbk-separator"/>
-		</div>	
-		<div class="wbk-frontend-row" id="timeselect_row">	
-			<div class="wbk-col-12-12">	
-				<label class="wbk-input-label">Tell us your availibilities</label>
-				<hr class="wbk-hours-separator"/>		
-					<div class="wbk-frontend-row" >
- 				 		<div class="wbk-col-3-12 wbk-table-cell">
-							<input type="checkbox" value="tuesday" class="wbk-checkbox" id="wbk-day_tuesday" checked="checked">
-							<label  for="wbk-day_tuesday" class="wbk-checkbox-label">
-								Tuesday
-							</label>
-						</div>						 
- 				 		<div class="wbk-col-9-12">					 
-							<select id="wbk-time_tuesday" class="wbk-input wbk-width-100 wbk-time_after">
-								<option value="32400">from 9:00 am</option>
-								<option value="36000">from 10:00 am</option>
-							</select>
+					<div class="wbk-inner-container">
+						<div class="wbk-frontend-row">
+							<div class="wbk-col-12-12" id="wbk-service-id">
+								<label class="wbk-input-label">Select emloyee</label>
+								<select class="wbk-select wbk-input">
+									<option value="John Smith">John Smith</option>
+								</select>
+							</div>
+							<hr class="wbk-separator"/>
+						</div>
+						<div class="wbk-frontend-row" id="wbk-date-container">	
+							<div class="wbk-col-12-12" id="wbk-service-id">	
+						 		<label class="wbk-input-label">Select date</label>
+								<input type="text" class="wbk-input"/>
+							</div>		
+							<hr class="wbk-separator"/>
 						</div>	
-						<div style="clear:both"></div>		
-					</div>	
-					<div class="wbk-frontendrow" >
- 				 		<div class="wbk-col-3-12">
-							<input type="checkbox" value="tuesday" class="wbk-checkbox" id="wbk-day_tuesday" checked="checked">
-							<label for="wbk-day_tuesday" class="wbk-checkbox-label">
-								 Friday
-							</label>
-						</div>						 
- 				 		<div class="wbk-col-9-12">					 
-							<select id="wbk-time_tuesday" class="wbk-input wbk-width-100 wbk-time_after">
-								<option value="32400">from 9:00 am</option>
-								<option value="36000">from 10:00 am</option>
-							</select>
-						</div>	
-						<div style="clear:both"></div>	
-						<input type="button" class="wbk-button" id="wbk-search_time_btn" value="Search time slots">	
-					</div>	
- 			</div>		
-		</div>			
-		<div class="wbk-frontend-row" id="wbk-slots-container">	
-			<div class="wbk-col-12-12">	
-				<div class="wbk-day-title">
-					15 April 16
-				</div>
-				<hr class="wbk-day-separator"/>		
-			</div>	
-			<div class="wbk-col-12-12 wbk-text-center" >
-				<ul class="wbk-timeslot-list">				
-					<li class="wbk-col-4-6-12">
-						<div class="wbk-slot-inner">					
-							<div class="wbk-slot-time">
-								10pm	
-							</div>
-							<div class="wbk-slot-available">
-								1 availabe
-							</div>
-							<input type="button" value="Book" class="wbk-slot-button" />		 	
- 						</div>
- 					</li>
- 					<li class="wbk-col-4-6-12">
-						<div class="wbk-slot-inner">					
-							<div class="wbk-slot-time">
-								10pm	
-							</div>
-							<div class="wbk-slot-available">
-								1 availabe
-							</div>
-							<input type="button" value="Book" class="wbk-slot-button wbk-slot-active-button" />		 	
- 						</div>
- 					</li>
- 		 					<li class="wbk-col-4-6-12">
-						<div class="wbk-slot-inner">					
-							<div class="wbk-slot-time">
-								10pm	
-							</div>
-							<div class="wbk-slot-available">
-								1 availabe
-							</div>
-							<input type="button" value="Book" class="wbk-slot-button" />		 	
- 						</div>
- 					</li>
- 		 					<li class="wbk-col-4-6-12">
-						<div class="wbk-slot-inner">					
-							<div class="wbk-slot-time">
-								10pm	
-							</div>
-							<div class="wbk-slot-available">
-								1 availabe
-							</div>
-							<input type="button" value="Book" class="wbk-slot-button" />		 	
- 						</div>
- 					</li>
- 		 					<li class="wbk-col-4-6-12">
-						<div class="wbk-slot-inner">					
-							<div class="wbk-slot-time">
-								10pm	
-							</div>
-							<div class="wbk-slot-available">
-								1 availabe
-							</div>
-							<input type="button" value="Book" class="wbk-slot-button" />		 	
- 						</div>
- 					</li>
- 		 					<li class="wbk-col-4-6-12">
-						<div class="wbk-slot-inner">					
-							<div class="wbk-slot-time">
-								10pm	
-							</div>
-							<div class="wbk-slot-available">
-								1 availabe
-							</div>
-							<input type="button" value="Book" class="wbk-slot-button" />		 	
- 						</div>
- 					</li>
- 		 					<li class="wbk-col-4-6-12">
-						<div class="wbk-slot-inner">					
-							<div class="wbk-slot-time">
-								10pm	
-							</div>
-							<div class="wbk-slot-available">
-								1 availabe
-							</div>
-							<input type="button" value="Book" class="wbk-slot-button" />		 	
- 						</div>
- 					</li>
- 		 					<li class="wbk-col-4-6-12">
-						<div class="wbk-slot-inner">					
-							<div class="wbk-slot-time">
-								10pm	
-							</div>
-							<div class="wbk-slot-available">
-								1 availabe
-							</div>
-							<input type="button" value="Book" class="wbk-slot-button" />		 	
- 						</div>
- 					</li>
-				</ul>
-			</div>	
-			<hr class="wbk-separator"/>		
- 		</div>
- 		<div class="wbk-frontend-row" id="wbk-booking-form-container">
-			<div class="wbk-col-12-12">									 
-				<div class="wbk-details-sub-title">
- 					Fill in a form
- 				</div>
-				<hr class="wbk-form-separator"/>		
- 		 		<label class="wbk-input-label">Full name</label>
-				<input type="text" class="wbk-input"/>
- 		 		<label class="wbk-input-label">E-mail</label>
-				<input type="text" class="wbk-input"/>
-  		 		<label class="wbk-input-label">Phone number</label>
-				<input type="text" class="wbk-input"/>
- 		 		<label class="wbk-input-label">Comment</label>
-				<input type="text" class="wbk-input"/>
-				<input type="button" class="wbk-button" id="wbk-book_appointment" value="Book">	
- 		 	</div>
- 		</div>
-	</div>
-</div>';
+						<div class="wbk-frontend-row" id="timeselect_row">	
+							<div class="wbk-col-12-12">	
+								<label class="wbk-input-label">Tell us your availibilities</label>
+								<hr class="wbk-hours-separator"/>		
+									<div class="wbk-frontend-row" >
+				 				 		<div class="wbk-col-3-12 wbk-table-cell">
+											<input type="checkbox" value="tuesday" class="wbk-checkbox" id="wbk-day_tuesday" checked="checked">
+											<label  for="wbk-day_tuesday" class="wbk-checkbox-label">
+												Tuesday
+											</label>
+										</div>						 
+				 				 		<div class="wbk-col-9-12">					 
+											<select id="wbk-time_tuesday" class="wbk-input wbk-width-100 wbk-time_after">
+												<option value="32400">from 9:00 am</option>
+												<option value="36000">from 10:00 am</option>
+											</select>
+										</div>	
+										<div style="clear:both"></div>		
+									</div>	
+									<div class="wbk-frontendrow" >
+				 				 		<div class="wbk-col-3-12">
+											<input type="checkbox" value="tuesday" class="wbk-checkbox" id="wbk-day_tuesday" checked="checked">
+											<label for="wbk-day_tuesday" class="wbk-checkbox-label">
+												 Friday
+											</label>
+										</div>						 
+				 				 		<div class="wbk-col-9-12">					 
+											<select id="wbk-time_tuesday" class="wbk-input wbk-width-100 wbk-time_after">
+												<option value="32400">from 9:00 am</option>
+												<option value="36000">from 10:00 am</option>
+											</select>
+										</div>	
+										<div style="clear:both"></div>	
+										<input type="button" class="wbk-button" id="wbk-search_time_btn" value="Search time slots">	
+									</div>	
+							 				  				 
+				 			</div>		
+						</div>			
+						<div class="wbk-frontend-row" id="wbk-slots-container">	
+							<div class="wbk-col-12-12">	
+								<div class="wbk-day-title">
+									15 April 16
+								</div>
+								<hr class="wbk-day-separator"/>		
+
+							</div>	
+							<div class="wbk-col-12-12 wbk-text-center" >
+								<ul class="wbk-timeslot-list">				
+									<li class="wbk-col-4-6-12">
+										<div class="wbk-slot-inner">					
+											<div class="wbk-slot-time">
+												10pm	
+											</div>
+											<div class="wbk-slot-available">
+												1 seat available
+											</div>
+											<input type="button" value="Book" class="wbk-slot-button" />		 	
+				 						</div>
+				 					</li>
+				 					<li class="wbk-col-4-6-12">
+										<div class="wbk-slot-inner">					
+											<div class="wbk-slot-time">
+												10pm	
+											</div>
+											<div class="wbk-slot-available">
+												1 seat available
+											</div>
+											<input type="button" value="Book" class="wbk-slot-button wbk-slot-active-button" />		 	
+				 						</div>
+				 					</li>
+				 		 					<li class="wbk-col-4-6-12">
+										<div class="wbk-slot-inner">					
+											<div class="wbk-slot-time">
+												10pm	
+											</div>
+											<div class="wbk-slot-available">
+												1 seat available
+											</div>
+											<input type="button" value="Book" class="wbk-slot-button" />		 	
+				 						</div>
+				 					</li>
+				 		 					<li class="wbk-col-4-6-12">
+										<div class="wbk-slot-inner">					
+											<div class="wbk-slot-time">
+												10pm	
+											</div>
+											<div class="wbk-slot-available">
+												1 seat available
+											</div>
+											<input type="button" value="Book" class="wbk-slot-button" />		 	
+				 						</div>
+				 					</li>
+				 		 					<li class="wbk-col-4-6-12">
+										<div class="wbk-slot-inner">					
+											<div class="wbk-slot-time">
+												10pm	
+											</div>
+											<div class="wbk-slot-available">
+												1 seat available
+											</div>
+											<input type="button" value="Book" class="wbk-slot-button" />		 	
+				 						</div>
+				 					</li>
+				 		 					<li class="wbk-col-4-6-12">
+										<div class="wbk-slot-inner">					
+											<div class="wbk-slot-time">
+												10pm	
+											</div>
+											<div class="wbk-slot-available">
+												1 seat available
+											</div>
+											<input type="button" value="Book" class="wbk-slot-button" />		 	
+				 						</div>
+				 					</li>
+				 		 					<li class="wbk-col-4-6-12">
+										<div class="wbk-slot-inner">					
+											<div class="wbk-slot-time">
+												10pm	
+											</div>
+											<div class="wbk-slot-available">
+												1 seat available
+											</div>
+											<input type="button" value="Book" class="wbk-slot-button" />		 	
+				 						</div>
+				 					</li>
+				 		 					<li class="wbk-col-4-6-12">
+										<div class="wbk-slot-inner">					
+											<div class="wbk-slot-time">
+												10pm	
+											</div>
+											<div class="wbk-slot-available">
+												1 seat available
+											</div>
+											<input type="button" value="Book" class="wbk-slot-button" />		 	
+				 						</div>
+				 					</li>
+				 		 		 
+				 
+								</ul>
+							</div>	
+							<hr class="wbk-separator"/>		
+				 		</div>
+				 		<div class="wbk-frontend-row" id="wbk-booking-form-container">
+							<div class="wbk-col-12-12">									 
+								<div class="wbk-details-sub-title">
+				 					Fill in a form
+				 				</div>
+								<hr class="wbk-form-separator"/>		
+
+				 		 		<label class="wbk-input-label">Full name</label>
+								<input type="text" class="wbk-input"/>
+				 		 		<label class="wbk-input-label">E-mail</label>
+								<input type="text" class="wbk-input"/>
+				  		 		<label class="wbk-input-label">Phone number</label>
+								<input type="text" class="wbk-input"/>
+				 		 		<label class="wbk-input-label">Comment</label>
+								<input type="text" class="wbk-input"/>
+								<input type="button" class="wbk-button" id="wbk-book_appointment" value="Book">	
+				 		 	</div>
+				 		</div>
+					</div>
+				</div>';
 		return $html;
 	}
 	public function renderSectionSetMenu( $slug ){
@@ -1359,7 +1364,7 @@ class SoloFramework extends stdClass  {
 		$html = '<a class="button" id="wbk-preview-btn" href="javascript:show_prview()">Show preview</a>'; 
 		$html .= '<input  value="'. __( 'Save options', 'slf' ) . '" type="button" class="button slf-save-button" onclick = "slf_save_sections_set( \'' . $this->slug . '\',  \'' . $slug . '\')">';
 		 
-		$presets_folder =  WP_PLUGIN_DIR . DIRECTORY_SEPARATOR . 'webba-booking' . DIRECTORY_SEPARATOR . 'presets' . DIRECTORY_SEPARATOR.'*';
+		$presets_folder =  WP_PLUGIN_DIR . DIRECTORY_SEPARATOR . 'webba-booking-lite' . DIRECTORY_SEPARATOR . 'presets' . DIRECTORY_SEPARATOR.'*';
 
   		$select = '<select id="presets_list" class="slf_right" >';
  		foreach( glob( $presets_folder ) as $file) {    

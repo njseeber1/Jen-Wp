@@ -19,6 +19,7 @@ class WBK_Google{
 	public function connect(){
 		return 0;
 	}
+
 	public function renderCalendarBlock(){
 		$html = '';	
  		return $html;

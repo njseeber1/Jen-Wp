@@ -5,7 +5,7 @@ Donate link: http://webba-booking.com/
 Tags: appointment, booking, calendar, reservation, PayPal
 Requires at least: 3.9  
 Tested up to: 4.8.2 
-Stable tag: 3.2.17
+Stable tag: 3.2.23
 License: GPLv3 or later  
 License URI: http://www.gnu.org/licenses/gpl-3.0.html  
 
@@ -170,6 +170,17 @@ Just find the button Webba Booking form above content editor for a post or a pag
 Important improvements
 
 == Changelog ==
+
+3.2.23 13/11/2017
+
+* Improvements: attachments in custom forms.
+* Improvements: option to set checkbox field as required
+* Improvements: option to set selected service in url
+* Improvements: appearance options interface improved    
+
+3.2.18 11/11/2017
+
+* Bug fix: bug with design presets list.
 
 3.2.17 29/10/2017
 

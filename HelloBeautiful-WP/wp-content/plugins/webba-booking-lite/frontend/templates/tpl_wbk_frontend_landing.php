@@ -148,7 +148,7 @@
 
 	 		$appointment_id = WBK_Db_Utils::getAppointmentIdByAdminToken( $admin_approve );
 
-	 		error_log($admin_approve);
+	 		 
 	 		if( $appointment_id === false ){
 	 			$valid = false;
 	 		} else {							 

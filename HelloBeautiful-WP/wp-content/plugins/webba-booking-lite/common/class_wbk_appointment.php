@@ -21,6 +21,8 @@ class WBK_Appointment extends WBK_Entity {
 	protected $service_id;
 	// quantity
 	protected $quantity;
+	// time offset
+	protected $time_offset;
 
 	public function __construct() {
 		parent::__construct();
@@ -145,6 +147,21 @@ class WBK_Appointment extends WBK_Entity {
 	public function getQuantity() {
 		return absint( $this->quantity );
 	}
+	// set time offset
+	public function setTimeOffset( $value ) {
+		$value = intval( $value );
+		if ( WBK_Validator::checkInteger( $value, -10000, 10000 ) ){
+			$this->time_offset = $value;			
+			return true;
+		} else {
+			array_push( $this->error_messages, __( 'incorrect time offset', 'wbk' ) );
+			return false;
+		} 
+	}
+	// get time offset
+	public function getTimeOffset() {
+		return intval( $this->time_offset );
+	}
 	// set time
 	public function setTime( $value ) {
 		$value = absint( $value );
@@ -160,7 +177,13 @@ class WBK_Appointment extends WBK_Entity {
 	public function getTime() {
 		return absint( $this->time );
 	}
-	
+	// get local time
+	public function getLocalTime() {	
+		$timezone = new DateTimeZone( get_option( 'wbk_timezone' ) );
+		$current_offset =  $this->getTimeOffset() * -60 - $timezone->getOffset( new DateTime );
+ 		$local_time = absint( $this->time ) + $current_offset;
+		return $local_time;
+	}	
 	// set day
 	public function setDay( $value ) {
 		$value = absint( $value );
@@ -179,7 +202,7 @@ class WBK_Appointment extends WBK_Entity {
 	// set attachment
 	public function setAttachment( $value ) {
 		$value = sanitize_text_field ( $value );
-		if ( WBK_Validator::checkStringSize( $value, 0, 255 ) ){
+		if ( WBK_Validator::checkStringSize( $value, 0, 1024 ) ){
 			$this->attachment = $value;
 			return true;
 		} else {
@@ -264,6 +287,12 @@ class WBK_Appointment extends WBK_Entity {
 		if ( !$this->setService( $result->service_id ) ) {
 			return false;
 		}
+		if ( !$this->setTimeOffset( $result->time_offset ) ) {
+			return false;
+		}
+		if ( !$this->setAttachment( $result->attachment ) ) {
+			return false;
+		}	
 		return true;
   	}
   	// update appointment
@@ -315,7 +344,9 @@ class WBK_Appointment extends WBK_Entity {
 					'day' => $this->getDay(),
 					'duration' => $this->getDuration(),
 					'extra' => $this->getExtraWithFieldIds(),
-					'quantity' =>$this->getQuantity()
+					'quantity' => $this->getQuantity(),
+					'time_offset' => $this->getTimeOffset(),
+					'attachment' => $this->getAttachment()
 				), 
 				 
 				
@@ -329,10 +360,13 @@ class WBK_Appointment extends WBK_Entity {
 					'%d',
 					'%d',
 					'%s',
-					'%d'	 
+					'%d',
+					'%d',
+					'%s'	 
 				)
 				
 			) === false ) {
+
 			return false;
 		} else {
 			$new_id = $wpdb->insert_id;		

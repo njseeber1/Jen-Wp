@@ -3,7 +3,7 @@
 Plugin Name: Webba Booking Lite
 Plugin URI: http://webba-booking.com
 Description: Responsive appointment and reservation plugin.
-Version: 3.2.17
+Version: 3.2.23
 Author: WebbaPlugins
 Author URI: http://webba-booking.com
 License: Commercial
@@ -215,6 +215,8 @@ function wbk_activate() {
 	add_option( 'wbk_add_gg_button_text', __( 'Add to my Google Calendar', 'wbk' ) );	
 	add_option( 'wbk_email_landing_text_gg_event_add', __( 'Click here to add this event to your Google Calendar.', 'wbk' ) );
 	add_option( 'wbk_time_slot_available_text', __( 'available', 'wbk' ) );
+	add_option( 'wbk_allow_attachemnt', 'no' );
+	add_option( 'wbk_attachment_file_types', 'image/*' );
 
  	WBK_Db_Utils::createHtFile();
 }
@@ -238,7 +240,8 @@ function wbk_update_data(){
 	WBK_Db_Utils::update_3_2_2();
 	WBK_Db_Utils::update_3_2_3();
 	WBK_Db_Utils::update_3_2_16();
-
+	WBK_Db_Utils::update_3_2_18();
+	WBK_Db_Utils::update_3_2_21();
 	WBK_Db_Utils::deleteExpiredAppointments();
 }
 function wbk_admin_init(){
@@ -383,8 +386,8 @@ function wbk_uninstall() {
 	delete_option( 'wbk_add_gg_button_text' );	
 	delete_option( 'wbk_email_landing_text_gg_event_add' );
 	delete_option( 'wbk_time_slot_available_text', __( 'available', 'wbk' ) );
-
-
+	delete_option( 'wbk_allow_attachemnt' );
+	delete_option( 'wbk_attachment_file_types');
 }
 // common ajax controller
 $ajaxController = new WBK_Ajax_Controller();

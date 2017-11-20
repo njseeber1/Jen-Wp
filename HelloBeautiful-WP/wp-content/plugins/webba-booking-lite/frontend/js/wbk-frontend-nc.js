@@ -2,6 +2,7 @@
 // step count
 var wbk_total_steps;
 var wbkjQ = jQuery.noConflict();
+// onload function
 wbkjQ(function ($) {
 	if( wbkjQ('.wbk-payment-init').length > 0 ){
  		wbk_set_payment_events();
@@ -90,7 +91,6 @@ function wbk_setServiceEvent() {
 			if( wbkl10n.show_desc == 'enabled' ){
 				wbkjQ( '#wbk_description_holder' ).html( '<label class="wbk-input-label">' + service_desc + '</label>' );
 			}
-
 		} else {
 			wbk_clearSetDate();
 			wbk_clearSetTime();
@@ -473,22 +473,17 @@ function wbk_setTimeslotEvent(){
 		// multi booking mode start
 		if( wbkl10n.multi_booking == 'enabled' || wbkl10n.multi_booking == 'enabled_slot' ){
  			wbkjQ('#wbk-booking-form-container').html('');
- 			wbkjQ(this).toggleClass('wbk-slot-active-button');
-			
-			var selected_cnt = wbkjQ('.wbk-slot-active-button').not('#wbk-to-checkout').length;
-		 
+ 			wbkjQ(this).toggleClass('wbk-slot-active-button');		
+			var selected_cnt = wbkjQ('.wbk-slot-active-button').not('#wbk-to-checkout').length;		
 			if ( wbkl10n.multi_limit != '' && parseInt( wbkl10n.multi_limit ) < parseInt( selected_cnt ) ){
 				wbkjQ(this).toggleClass('wbk-slot-active-button');
 				return;
 			}
-
 			if( selected_cnt > 0){
-				
 				if(  wbkl10n.multi_booking == 'enabled_slot' ){
 					wbkjQ('#wbk-to-checkout').remove();
 				}
-
-				 
+		 
 					if(  wbkl10n.multi_booking  == 'enabled' ){
 						var zindex = parseInt( wbk_find_highest_zindex('div') ) + 1;
 						if( wbkjQ( '#wbk-to-checkout' ).length == 0 ){
@@ -650,8 +645,26 @@ function wbk_setTimeslotEvent(){
 					 					wbkjQ( this ).addClass('wbk-input-error');
 					 				}
 								});
-
-
+								// validate custom fields file inputs
+								wbkjQ('.wbk-file[aria-required="true"]').each(function() {     
+									if ( wbkjQ(this).prop('files').length == 0 ){
+										error_status = 1;
+										wbkjQ( this ).addClass('wbk-input-error');
+									}
+								});
+								// validate checkbox
+								wbkjQ('.wbk-checkbox-custom.wpcf7-validates-as-required').each(function() {
+									var validbox = false;
+									wbkjQ(this).find('.wbk-checkbox-custom').each( function(){
+										if ( wbkjQ(this).is(':checked') ){
+											validbox = true;
+										}
+									});
+									if( !validbox ){
+										wbkjQ(this).find('.wbk-checkbox-label').addClass( 'wbk-input-error' );
+										error_status = 1;
+									}
+								});
 								var extra_value = '';
 								// custom fields values (text)
 								wbkjQ('.wbk-text, .wbk-email-custom').not('#wbk-name,#wbk-email,#wbk-phone').each(function() {
@@ -705,7 +718,7 @@ function wbk_setTimeslotEvent(){
 								        							scrollTop: wbkjQ('#wbk-booking-done').offset().top - 120
 								   								}, 1000);
 				  				});
-								
+								var time_offset = new Date().getTimezoneOffset();
 								var form_data = new FormData();				 			 						 		 
 								form_data.append( 'action' , 'wbk_book');
 								form_data.append( 'time', times);
@@ -717,7 +730,16 @@ function wbk_setTimeslotEvent(){
 				 				form_data.append( 'extra', extra_value);
 				 				form_data.append( 'quantity', quantity);
 				 				form_data.append( 'secondary_data', secondary_data);	
-			 					form_data.append( 'current_category', current_category );			 			 	                 			 			 	                 
+			 					form_data.append( 'current_category', current_category );
+			 					form_data.append( 'time_offset', time_offset );	
+								var iteration = 0;
+								if( wbkl10n.allow_attachment == 'yes' ){
+									wbkjQ('.wbk-file').each( function () { 
+										iteration++;
+										var fileindex = 'file' + iteration;
+										form_data.append( fileindex, wbkjQ(this).prop('files')[0] );
+									});
+								}
 				                wbkjQ.ajax({
 					    		  	url: wbkl10n.ajaxurl,
 						          	type: 'POST',
@@ -1027,6 +1049,27 @@ function wbk_book_processing( time, service ){
 			wbkjQ( this ).addClass('wbk-input-error');
 		}
 	});
+	// validate custom fields file inputs
+	wbkjQ('.wbk-file[aria-required="true"]').each(function() {     
+		if ( wbkjQ(this).prop('files').length == 0 ){
+			error_status = 1;
+			wbkjQ( this ).addClass('wbk-input-error');
+		}
+	});
+	// validate checkbox
+	wbkjQ('.wbk-checkbox-custom.wpcf7-validates-as-required').each(function() {
+		var validbox = false;
+		wbkjQ(this).find('.wbk-checkbox-custom').each( function(){
+			if ( wbkjQ(this).is(':checked') ){
+				validbox = true;
+			}
+		});
+		if( !validbox ){
+			wbkjQ(this).find('.wbk-checkbox-label').addClass( 'wbk-input-error' );
+			error_status = 1;
+		}
+	});
+
 	var extra_value = '';
 	// custom fields values (text)
 	wbkjQ('.wbk-text, .wbk-email-custom').not('#wbk-name,#wbk-email,#wbk-phone').each(function() {
@@ -1086,7 +1129,8 @@ function wbk_book_processing( time, service ){
 	        							scrollTop: wbkjQ('#wbk-booking-done').offset().top - 120
 	   								}, 1000);
 	});
-	var form_data = new FormData();				
+	var form_data = new FormData();
+	var time_offset = new Date().getTimezoneOffset();		
 	form_data.append( 'action' , 'wbk_book');
 	form_data.append( 'time', time );
 	form_data.append( 'service', service);
@@ -1098,6 +1142,15 @@ function wbk_book_processing( time, service ){
 	form_data.append( 'quantity', quantity);
 	form_data.append( 'secondary_data', secondary_data);	
 	form_data.append( 'current_category', current_category );
+	form_data.append( 'time_offset', time_offset );
+	var iteration = 0;
+	if( wbkl10n.allow_attachment == 'yes' ){
+		wbkjQ('.wbk-file').each( function () { 
+			iteration++;
+			var fileindex = 'file' + iteration;
+			form_data.append( fileindex, wbkjQ(this).prop('files')[0] );
+		});
+	}
     wbkjQ.ajax({
 	  	url: wbkl10n.ajaxurl,
       	type: 'POST',

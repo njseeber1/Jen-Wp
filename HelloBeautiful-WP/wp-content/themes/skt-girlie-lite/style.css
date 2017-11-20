@@ -141,7 +141,7 @@ a.more-button:hover{background-color:#d5d5d5;}
 
 /* = Page lay out css
 -------------------------------------------------------------- */
-.site-main{ width:740px; margin:0; padding:0; float:left;}
+.site-main{ margin:0; padding:0; float:left;}
 #sitefull{ width:100%; float:none;}
 #sitefull p{ margin-bottom:15px;}
 .page_content{ padding:25px 0;}

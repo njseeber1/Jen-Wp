@@ -132,7 +132,6 @@ class WBK_Ajax_Controller {
 		$days 	     = $_POST['days'];
 		$times       = $_POST['times'];
 		$offset 	 = $_POST['offset'];
-		
 		// check date variable: string date or int timestamp
 		if ( !is_numeric( $date) ) {
 			$day_to_render = strtotime( $date );
@@ -353,6 +352,21 @@ class WBK_Ajax_Controller {
 	public function ajaxBook() {
 		global $wpdb;
 		global $wbk_wording;
+		$arr_uploaded_urls = array();
+		if( get_option( 'wbk_allow_attachemnt', 'no' ) == 'yes' ){
+			foreach ( $_FILES as $file  ) {
+				error_log( 'File found');
+				$uploaded_file = wp_handle_upload( $file, array( 'test_form' => false ) );
+				if( $uploaded_file && !isset( $uploaded_file['error'] ) ) {
+					$arr_uploaded_urls[] = $uploaded_file['file'];
+				}
+			}
+		}
+		if( count( $arr_uploaded_urls ) > 0 ){
+			$attachments = json_encode( $arr_uploaded_urls );
+		} else {
+			$attachments = '';
+		}
 		date_default_timezone_set( get_option( 'wbk_timezone', 'UTC' ) );
 		$name = sanitize_text_field( $_POST['name'] );
 		$email = sanitize_text_field( $_POST['email'] );
@@ -363,7 +377,10 @@ class WBK_Ajax_Controller {
 		$quantity = sanitize_text_field( $_POST['quantity']);
 		$quantity = sanitize_text_field( $_POST['quantity']);
 		$current_category = sanitize_text_field( $_POST['current_category']);
-
+		$time_offset =  sanitize_text_field( $_POST['time_offset']);
+		if( !is_numeric( $time_offset ) ){
+			$time_offset = 0;
+		}
 		 
 
 		if( isset( $_POST['secondary_data'] ) ){
@@ -374,21 +391,21 @@ class WBK_Ajax_Controller {
 			if( !is_numeric( $time ) ){
 				echo -9;
 				date_default_timezone_set('UTC');
-				error_log('error_1');
+				 
 				die();
 				return;
 			}
 			if( $time < time() ){
 				echo -9;
 				date_default_timezone_set('UTC');
-				error_log('error_2');
+				 
 				die();
 				return;
 			}
 			if( !WBK_Validator::checkInteger( $quantity, 1, 1000000 ) ){
 				echo -9;
 				date_default_timezone_set('UTC');
-				error_log('error_3');
+				 
 				die();
 				return;
 			}
@@ -411,7 +428,7 @@ class WBK_Ajax_Controller {
 				$count = $wpdb->get_var( $wpdb->prepare( 'SELECT COUNT(*) FROM wbk_appointments where service_id = %d and time = %d', $service_id, $time ) );
 				if ( $count > 0 ) {
 					echo -9;
-					error_log('error_4');
+					 
 					date_default_timezone_set('UTC');
 					die();
 					return;
@@ -474,31 +491,45 @@ class WBK_Ajax_Controller {
 			if ( !$appointment->setDescription( $desc ) ){
 				echo -9;
 				date_default_timezone_set('UTC');
-				error_log('error_5');
+				 
 				die();
 				return;
 			}
 			if ( !$appointment->setExtra( $extra ) ){
 				echo -9;
 				date_default_timezone_set('UTC');
-				error_log('error_6');
+				 
 				die();
 				return;
 			}
 			if ( !$appointment->setQuantity( $quantity ) ){
 				echo -9;
 				date_default_timezone_set('UTC');
-				error_log('error_7');
+				 
+				die();
+				return;
+			}
+			if ( !$appointment->setTimeOffset( $time_offset ) ){
+				echo -9;
+				date_default_timezone_set('UTC');
+				 
+				die();
+				return;
+			}
+			if ( !$appointment->setAttachment( $attachments ) ){
+				echo -9;
+				date_default_timezone_set('UTC');				 
 				die();
 				return;
 			}
 			if( !is_numeric( $time ) ){
 				echo -9;
 				date_default_timezone_set('UTC');
-				error_log('error_1');
+				 
 				die();
 				return;
 			}
+
 			$appointment_id = $appointment->add();
 			if ( !$appointment_id ) {
 				echo -8;
@@ -538,6 +569,7 @@ class WBK_Ajax_Controller {
 	 		$thanks_message =  sanitize_text_field( $wbk_wording['thanks_for_booking'] );	
 	 	}
 		$thanks_message .= WBK_PayPal::renderPaymentMethods( $service_id, $appointment_ids );
+		
 		if( count( $appointment_ids ) > 0 ){
 			$booked_slot_text = WBK_Db_Utils::booked_slot_placeholder_processing( $appointment_ids[0] );
 		} else {
@@ -597,7 +629,6 @@ class WBK_Ajax_Controller {
 		return;
 	}
 	protected function render_booking_form( $service_id, $time ){
-
 		global $wbk_wording;
 		$time_format = WBK_Date_Time_Utils::getTimeFormat();
 		$date_format = WBK_Date_Time_Utils::getDateFormat();
@@ -634,13 +665,11 @@ class WBK_Ajax_Controller {
 			$form_label = str_replace( '#dt', date_i18n( $date_format, $time ) . ' ' .  date_i18n( $time_format, $time ), $form_label );
 
 		}
-
 		$html = '<div class="wbk-details-sub-title">' . $form_label . ' </div>';
 		$html .= '<hr class="wbk-form-separator">';
 		if ( $service->getQuantity() > 1 ) {
 			$service_schedule = new WBK_Service_Schedule();
 			$service_schedule->setServiceId( $service->getId() );
-
 			if( is_array( $time ) ){
 				$avail_count  = 1000000;
 				foreach ( $time as $time_this ) {
@@ -696,7 +725,6 @@ class WBK_Ajax_Controller {
 			if ( $comment_label == '' ){
 				$comment_label = sanitize_text_field( $wbk_wording['form_comment'] );
 			}	
-
 			$html .= '<label class="wbk-input-label" for="wbk-customer_name">' .$name_label . '</label>';
 			$html .= '<input name="wbk-name" type="text" class="wbk-input wbk-width-100 wbk-mb-10" id="wbk-customer_name" />';
 			$html .= '<label class="wbk-input-label" for="wbk-customer_email">' . $email_label . '</label>';
@@ -720,8 +748,7 @@ class WBK_Ajax_Controller {
 									 'name="wbk-acceptance" value="1" id="wbk-acceptance" aria-invalid="false"><span class="wbk-checkbox-label"></span> <input type="hidden"',
 									  $cf7_form );
 
-			 
-
+			$cf7_form = str_replace('type="file"', 'type="file" accept="' . get_option( 'wbk_attachment_file_types', 'image/*' ) . '"', $cf7_form );
 			$html .= $cf7_form;
 		}
 		$book_text = get_option( 'wbk_book_text_form', '');

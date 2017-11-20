@@ -40,6 +40,22 @@
                 editor.insertContent( content );
             }
         });
+         editor.addButton( 'wbk_appointment_local_day_button', {
+            text: 'Booking local date',
+            icon: false,
+            onclick: function() {
+                var content = '#appointment_local_date';
+                editor.insertContent( content );
+            }
+        });
+        editor.addButton( 'wbk_appointment_local_time_button', {
+            text: 'Booking local time',
+            icon: false,
+            onclick: function() {
+                var content = '#appointment_local_time';
+                editor.insertContent( content );
+            }
+        });
         editor.addButton( 'wbk_appointment_id_button', {
             text: 'Appointment ID',
             icon: false,

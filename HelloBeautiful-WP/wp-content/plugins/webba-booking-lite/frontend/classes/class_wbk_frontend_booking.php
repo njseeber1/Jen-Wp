@@ -229,7 +229,8 @@ class WBK_Frontend_Booking {
 				'multi_limit'  => get_option( 'wbk_multi_booking_max', '' ),
 				'phone_required'  => get_option( 'wbk_phone_required', '3' ),
 				'show_desc' => get_option( 'wbk_show_service_description', 'disabled' ),
-				'date_input' => get_option( 'wbk_date_input', 'popup' )
+				'date_input' => get_option( 'wbk_date_input', 'popup' ),
+				'allow_attachment' => get_option( 'wbk_allow_attachemnt',  'no' )
 
 			);                                                 
 			wp_localize_script( 'wbk-frontend', 'wbkl10n', $translation_array ); 	

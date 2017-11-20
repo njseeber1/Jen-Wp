@@ -23,7 +23,11 @@ class SLFSection extends stdClass {
 				continue;
 			}
 			$html .= $component->render( $this->slug );
+
 		}
+        $html = str_replace( 'backround', 'background', $html );
+        $html = str_replace( 'Backround', 'Background', $html );
+
 		$html .= '</table>';		 	
 		return $html;
 	}

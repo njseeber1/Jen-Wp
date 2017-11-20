@@ -36,6 +36,8 @@ class WBK_Backend_Options extends WBK_Backend_Component {
 			$buttons[] = 'wbk_customer_name_button';
 			$buttons[] = 'wbk_appointment_day_button';
 			$buttons[] = 'wbk_appointment_time_button';
+			$buttons[] = 'wbk_appointment_local_day_button';		
+			$buttons[] = 'wbk_appointment_local_time_button';			
 			$buttons[] = 'wbk_appointment_id_button';
 			$buttons[] = 'wbk_customer_phone_button';
 			$buttons[] = 'wbk_customer_email_button';
@@ -50,7 +52,8 @@ class WBK_Backend_Options extends WBK_Backend_Component {
 			$buttons[] = 'wbk_multiple_loop';
 			$buttons[] = 'wbk_admin_cancel_link';
 			$buttons[] = 'wbk_admin_approve_link';		
-			$buttons[] = 'wbk_customer_ggcl_link';				
+			$buttons[] = 'wbk_customer_ggcl_link';			
+
 		}
 		return $buttons;
 	}
@@ -451,7 +454,7 @@ class WBK_Backend_Options extends WBK_Backend_Component {
 	        'wbk_email_settings_section',
 	        array()
     	);
-		register_setting(
+    	register_setting(
         	'wbk_options',
         	'wbk_email_customer_book_status',
          	 array ( $this, 'validate_email_customer_book_status' )
@@ -880,6 +883,7 @@ class WBK_Backend_Options extends WBK_Backend_Component {
         	'wbk_multi_booking_max',
          	 array ( $this, 'validate_multi_booking_max' )
     	);
+
     	add_settings_field(
 	        'wbk_skip_timeslot_select',
 	        __( 'Skip time slot selection', 'wbk' ),
@@ -1426,6 +1430,45 @@ class WBK_Backend_Options extends WBK_Backend_Component {
         	'wbk_show_locked_as_booked',
          	 array ( $this, 'validate_show_locked_as_booked' )
     	);
+		add_settings_field(
+		    'wbk_allow_attachemnt',
+		    __( 'Allow using attachments', 'wbk' ),
+		    array( $this, 'render_allow_using_attachments' ),
+		    'wbk-options',
+		    'wbk_mode_settings_section',
+		    array()
+		);
+		register_setting(
+			'wbk_options',
+			'wbk_allow_attachemnt',
+		 	 array ( $this, 'validate_allow_using_attachments' )
+		);		
+		add_settings_field(
+		    'wbk_attachment_file_types',
+		    __( 'Attachments file types', 'wbk' ),
+		    array( $this, 'render_attachment_file_types' ),
+		    'wbk-options',
+		    'wbk_mode_settings_section',
+		    array()
+		);
+		register_setting(
+			'wbk_options',
+			'wbk_attachment_file_types',
+		 	 array( $this, 'validate_attachment_file_types' )
+		);
+		add_settings_field(
+		    'wbk_allow_service_in_url',
+		    __( 'Allow using the service id in url', 'wbk' ),
+		    array( $this, 'render_allow_service_in_url' ),
+		    'wbk-options',
+		    'wbk_mode_settings_section',
+		    array()
+		);
+		register_setting(
+			'wbk_options',
+			'wbk_allow_service_in_url',
+		 	 array ( $this, 'validate_allow_service_in_url' )
+		);		
     	register_setting(
         	'wbk_options',
         	'wbk_nothing_to_pay_message',
@@ -1918,7 +1961,11 @@ class WBK_Backend_Options extends WBK_Backend_Component {
         	'wbk_gg_secret',
          	 array ( $this, 'validate_gg_secret' )
     	);
+
 		//  ******************************************************************************************************
+
+
+
 		// backend interface section init start *******************************************************************
  	 	add_settings_section(
 	        'wbk_interface_settings_section',
@@ -2317,6 +2364,7 @@ class WBK_Backend_Options extends WBK_Backend_Component {
 		return $input;
 	}
 	//****** end customer cacnelation block
+
   	// render email to customer message
 	public function render_email_customer_book_message() {
  		$value = get_option( 'wbk_email_customer_book_message' );
@@ -2332,6 +2380,11 @@ class WBK_Backend_Options extends WBK_Backend_Component {
 	public function validate_email_customer_book_message( $input ) {
 		return $input;
 	}
+
+
+
+
+
 	// render email to customer message (approve)
 	public function render_email_customer_approve_message() {
  		$value = get_option( 'wbk_email_customer_approve_message', '<p>Your appointment bookin on #appointment_day at #appointment_time has been approved.</p>' );
@@ -2360,6 +2413,7 @@ class WBK_Backend_Options extends WBK_Backend_Component {
 		$input = sanitize_text_field( $input );
 		return $input; 
 	}
+
 	// render customer email subject (on approve)
 	public function render_email_customer_approve_subject() {
 		$value = get_option( 'wbk_email_customer_approve_subject', __( 'Your booking has been approved', 'wbk' ) );
@@ -2373,6 +2427,11 @@ class WBK_Backend_Options extends WBK_Backend_Component {
 		$input = sanitize_text_field( $input );
 		return $input;		 
 	}
+
+
+
+
+
 	// render email to secondary
 	public function render_email_secondary_book_status() {
  		$value = get_option( 'wbk_email_secondary_book_status', '' );
@@ -2814,6 +2873,51 @@ class WBK_Backend_Options extends WBK_Backend_Component {
 		}
 		return $input;
 	}   	
+	public function render_allow_using_attachments() {
+	    $value = get_option( 'wbk_allow_attachemnt', 'no' );
+	    $value = sanitize_text_field( $value );
+	    $html = '<select id="wbk_allow_attachemnt" name="wbk_allow_attachemnt">
+	                <option ' . selected(  $value, 'yes', false ) . ' value="yes">' . __( 'Yes', 'wbk' ) . '</option>
+	                <option ' . selected(  $value, 'no', false ) . ' value="no">' . __( 'No', 'wbk' ) . '</option>     
+	             </select>';	 
+	    echo $html;
+	}
+	public function validate_allow_using_attachments( $input ) {
+	    if( $input != 'yes' && $input != 'no' ){
+	        $input = 'no';
+	    }
+	    return $input;
+	}     
+	public function render_allow_service_in_url() {
+	    $value = get_option( 'wbk_allow_service_in_url', 'no' );
+	    $value = sanitize_text_field( $value );
+	    $html = '<select id="wbk_allow_service_in_url" name="wbk_allow_service_in_url">
+	                <option ' . selected(  $value, 'yes', false ) . ' value="yes">' . __( 'Yes', 'wbk' ) . '</option>
+	                <option ' . selected(  $value, 'no', false ) . ' value="no">' . __( 'No', 'wbk' ) . '</option>     
+	             </select>';	 
+	    echo $html;
+	}
+	public function validate_allow_service_in_url( $input ) {
+	    if( $input != 'yes' && $input != 'no' ){
+	        $input = 'no';
+	    }
+	    return $input;
+	}       
+	public function render_attachment_file_types() {
+		$value = get_option( 'wbk_attachment_file_types', 'image/*' );
+		$value = sanitize_text_field( $value );
+		$html = '<input type="text" id="wbk_attachment_file_types" name="wbk_attachment_file_types" value="'.$value.'" >';
+  		$html .= '<p class="description">' . __( 'Example: file_extension. A file extension starting with the STOP character, e.g: .gif, .jpg, .png, .doc', 'wbk' ) . '</p>';
+  		$html .= '<p class="description">' . __( 'Example: audio/* all sound files are accepted.', 'wbk' ) . '</p>';
+  		$html .= '<p class="description">' . __( 'Example: video/* all video files are accepted.', 'wbk' ) . '</p>';
+  		$html .= '<p class="description">' . __( 'Example: image/* all image files are accepted.', 'wbk' ) . '</p>';
+  		$html .= '<p class="description">' . __( 'Example: media_type. A valid media type. <a rel="noopener" target="_blank" href="https://www.iana.org/assignments/media-types/media-types.xhtml">List of media types</a>', 'wbk' ) . '</p>';
+  	
+  		echo $html;
+	}
+	public function validate_attachment_file_types( $input ) {
+		return sanitize_text_field( $input );
+	}
 	// render multi booking
 	public function render_multi_booking() {
 		$value = get_option( 'wbk_multi_booking', 'disabled' );
@@ -2832,9 +2936,6 @@ class WBK_Backend_Options extends WBK_Backend_Component {
 		}
 		return $input;
 	}
-
-
-
 	// render timeslot time string
 	public function render_timeslot_time_string() {
 		$value = get_option( 'wbk_timeslot_time_string', 'start' );
@@ -3252,7 +3353,9 @@ class WBK_Backend_Options extends WBK_Backend_Component {
 		$value = get_option( 'wbk_gg_calendar_event_title', '#customer_name' );
 		$value = sanitize_text_field( $value );
 		$html = '<input type="text" id="wbk_gg_calendar_event_title" name="wbk_gg_calendar_event_title" value="'.$value.'" >';
-		$html .= '<p class="description">' . __( 'Available placeholders:', 'wbk' ) . ': #service_name, #customer_name, #appointment_id' . '</p>';
+		$html .= '<p class="description">' . __( 'Available placeholders:', 'wbk' ) . ' #customer_name, #customer_phone, #customer_email, #customer_comment, #items_count, #appointment_id, #customer_custom, #total_amount, #service_name' . '</p>';
+		$html .= '<p class="description">' . __( 'Placeholder for custom field:', 'wbk' ) . ' #field_ + custom field id. Example: #field_custom-field-1' . '</p>';
+
   		echo $html;
 	}
 	// validate gg calendar event title
@@ -3267,6 +3370,7 @@ class WBK_Backend_Options extends WBK_Backend_Component {
 		$html = '<input type="text" id="wbk_gg_calendar_event_description" name="wbk_gg_calendar_event_description" value="'.$value.'" >';
 		$html .= '<p class="description">' . __( 'Available placeholders:', 'wbk' ) . '#customer_name, #customer_phone, #customer_email, #customer_comment, #items_count, #appointment_id, #customer_custom, #total_amount, #service_name
 				 ' . '</p>';
+		$html .= '<p class="description">' . __( 'Placeholder for custom field:', 'wbk' ) . ' #field_ + custom field id. Example: #field_custom-field-1' . '</p>';
   		echo $html;
 	}
 	// validate gg calendar event description
@@ -3279,7 +3383,10 @@ class WBK_Backend_Options extends WBK_Backend_Component {
 		$value = get_option( 'wbk_gg_calendar_event_title_customer', '#service_name' );
 		$value = sanitize_text_field( $value );
 		$html = '<input type="text" id="wbk_gg_calendar_event_title_customer" name="wbk_gg_calendar_event_title_customer" value="'.$value.'" >';
-		$html .= '<p class="description">' . __( 'Available placeholders:', 'wbk' ) . ': #service_name, #customer_name, #appointment_id' . '</p>';
+		$html .= '<p class="description">' . __( 'Available placeholders:', 'wbk' ) . '#customer_name, #customer_phone, #customer_email, #customer_comment, #items_count, #appointment_id, #customer_custom, #total_amount, #service_name
+				 ' . '</p>';
+		$html .= '<p class="description">' . __( 'Placeholder for custom field:', 'wbk' ) . ' #field_ + custom field id. Example: #field_custom-field-1' . '</p>';
+
   		echo $html;
 	}
 	// validate gg calendar event title
@@ -3294,6 +3401,8 @@ class WBK_Backend_Options extends WBK_Backend_Component {
 		$html = '<input type="text" id="wbk_gg_calendar_event_description_customer" name="wbk_gg_calendar_event_description_customer" value="'.$value.'" >';
 		$html .= '<p class="description">' . __( 'Available placeholders:', 'wbk' ) . '#customer_name, #customer_phone, #customer_email, #customer_comment, #items_count, #appointment_id, #customer_custom, #total_amount, #service_name
 				 ' . '</p>';
+		$html .= '<p class="description">' . __( 'Placeholder for custom field:', 'wbk' ) . ' #field_ + custom field id. Example: #field_custom-field-1' . '</p>';
+
   		echo $html;
 	}
 	// validate gg calendar event description
@@ -3609,7 +3718,7 @@ class WBK_Backend_Options extends WBK_Backend_Component {
             	'media_buttons' => true,
             	'editor_height' => 300
             );
- 		echo '<a  class="button wbk_email_editor_toggle">' . __( 'Toggle editor', 'wbk' ) . '</a><div class="wbk_email_editor_wrap" style="display:none;">';
+ 		echo '<a class="button wbk_email_editor_toggle">' . __( 'Toggle editor', 'wbk' ) . '</a><div class="wbk_email_editor_wrap" style="display:none;">';
 		wp_editor( $value, 'wbk_book_thanks_message', $args );
 		echo '</div>';
 	}
