@@ -11,6 +11,7 @@ $dir = NickPlugin_dir();
 
 function NickPlugin_init() {
 	include_once (ABSPATH . "/wp-content/plugins/Nick-WPPlugin/shortcodes/shortcode1.php");
+	add_post_type_support( 'page', 'excerpt' );
 }
 
 
@@ -97,5 +98,6 @@ add_action('admin_print_footer_scripts', 'NickPlugin_admin_js');
 
 register_activation_hook((ABSPATH . "/wp-content/plugins/Nick-WPPlugin/NickPlugin.php"), 'NickPluginactivation');
 register_deactivation_hook((ABSPATH . "/wp-content/plugins/Nick-WPPlugin/NickPlugin.php"), 'NickPlugindeactivation');
+
 
 ?>

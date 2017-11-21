@@ -58,6 +58,7 @@ function skt_girlie_setup() {
 		'default-color' => 'ffffff'
 	) );
 	add_editor_style( 'editor-style.css' );
+	add_post_type_support( 'page', 'excerpt' );
 } 
 endif; // skt_girlie_setup
 add_action( 'after_setup_theme', 'skt_girlie_setup' ); 
@@ -256,3 +257,4 @@ function skt_girlie_the_custom_logo() {
 	}
 }
 endif;
+
